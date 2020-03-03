@@ -48,7 +48,7 @@
    docs and return a vector containing each document"
   [^String yaml-documents]
   (mapv decode
-    (.loadAll (Yaml. (*constructor*)) yaml-documents)))
+    (.loadAll (Yaml. ^Constructor (*constructor*)) yaml-documents)))
 
 (defn parse-string
   "Parse a yaml input string. If multiple documents are found it will return a vector of documents
@@ -64,6 +64,6 @@
                             constructor *constructor*}}]
   (binding [*keywordize* keywords]
     (try
-      (decode (.load (Yaml. (constructor)) string))
+      (decode (.load (Yaml. ^Constructor (constructor)) string))
       (catch ComposerException e
         (parse-documents string)))))
